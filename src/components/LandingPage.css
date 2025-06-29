@@ -1,0 +1,24 @@
+.start-btns {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.headline {
+  font-size: 5rem;
+  text-align: center;
+}
+.floating {
+  animation: floatSpin 3s ease-in-out infinite;
+}
+@keyframes floatSpin {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}

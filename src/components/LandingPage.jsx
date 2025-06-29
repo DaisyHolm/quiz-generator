@@ -1,0 +1,16 @@
+import Button from "./Button.jsx";
+import "./LandingPage.css";
+
+export default function LandingPage() {
+  return (
+    <>
+      <div className="flex-container">
+        <h1 className="headline floating">Quiz Time!</h1>
+        <div className="start-btns">
+          <Button>Create your OWN quiz now!</Button>
+          <Button path={"/random-quiz"}>Take a random quiz here!</Button>
+        </div>
+      </div>
+    </>
+  );
+}
