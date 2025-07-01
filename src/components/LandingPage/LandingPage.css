@@ -1,8 +1,13 @@
+.flex-container {
+  margin: auto;
+  max-width: 700px;
+}
 .start-btns {
   display: flex;
   gap: 2rem;
   justify-content: center;
   margin-top: 4rem;
+  flex-wrap: wrap;
 }
 .headline {
   font-size: 5rem;

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./PosibleAnswer.css";
 
 export default function PosibleAnswer({

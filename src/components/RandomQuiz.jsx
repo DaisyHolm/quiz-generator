@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import QUESTIONS from "../assets/general_knowledge_questions.json";
-import Question from "./Question.jsx";
-import ResultModal from "./ResultModal.jsx";
+import Question from "./Question/Question.jsx";
+import ResultModal from "./ResultModal/ResultModal.jsx";
 
 export default function RandomQuiz(handleAnswer) {
   const [randomQuiz, setRandomQuiz] = useState([]);

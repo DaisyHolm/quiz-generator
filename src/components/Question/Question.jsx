@@ -1,4 +1,4 @@
-import PosibleAnswer from "./PosibleAnswer.jsx";
+import PosibleAnswer from "../PosibleAnswer/PosibleAnswer.jsx";
 import "./Question.css";
 import { useState, useEffect } from "react";
 

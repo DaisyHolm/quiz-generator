@@ -1,5 +1,5 @@
 import "./ResultModal.css";
-import Button from "./Button.jsx";
+import Button from "../Button/Button.jsx";
 import confetti from "canvas-confetti";
 import { useState, useEffect } from "react";
 
