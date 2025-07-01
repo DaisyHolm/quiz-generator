@@ -13,8 +13,9 @@ export default function RandomQuiz(handleAnswer) {
     function createRandomQuiz() {
       const shuffled = [...QUESTIONS].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 10);
+      const addIndex = selected.map((quest, index) => ({ ...quest, index }));
 
-      setRandomQuiz(selected);
+      setRandomQuiz(addIndex);
     }
     createRandomQuiz();
   }, []);

@@ -38,7 +38,7 @@ export default function Question({ question, onAnswered }) {
   }, [question]);
   return (
     <div className="question-container">
-      <h2>{question.question}</h2>
+      <h2>{question.index + 1 + "." + " " + question.question}</h2>
       <div className="answers-container">
         <PosibleAnswer
           onClick={() => handleAnswer(question.options[0])}

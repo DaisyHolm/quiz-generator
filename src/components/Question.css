@@ -6,10 +6,20 @@
   text-align: center;
   gap: 2rem;
   height: 100vh;
+  padding: 1.5rem;
 }
-
+/* .question-container h2::first-letter {
+  font-size: 2rem;
+} */
 .answers-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .answers-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -11,6 +11,15 @@
 .floating {
   animation: floatSpin 3s ease-in-out infinite;
 }
+@media (max-width: 700px) {
+  .start-btns {
+    flex-direction: column;
+  }
+  .headline {
+    font-size: 4rem;
+  }
+}
+
 @keyframes floatSpin {
   0% {
     transform: translateY(0) rotate(0deg);

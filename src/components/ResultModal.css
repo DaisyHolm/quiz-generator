@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
 }
 
 .modal-container {
@@ -39,4 +40,17 @@
 }
 .close-modal .btn {
   padding: 1rem 4rem;
+}
+
+@media (max-width: 700px) {
+  .close-modal {
+    text-align: center;
+  }
+  .modal-container .result-score {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  .modal-container {
+    width: 90%;
+  }
 }
