@@ -6,6 +6,7 @@
 
 :root {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.2rem;
   --primary-color: rgb(255, 255, 246);
   --secondary-color: rgb(250, 207, 237);
   --tertiary-color: rgb(255, 136, 217);

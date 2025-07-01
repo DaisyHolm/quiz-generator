@@ -1,4 +1,5 @@
 import Button from "../Button/Button.jsx";
+import "./CreateQuiz.css";
 
 export default function CreateQuiz() {
   return (
@@ -10,7 +11,12 @@ export default function CreateQuiz() {
       </p>
       <input type="text" placeholder="Title" className="input-big" />
       <textarea name="description" placeholder="Description"></textarea>
-      <Button>Add question</Button>
+      <div className="create-question-cta">
+        <Button>Add question</Button>
+        <p className="floating">
+          &lt;-- Click here to start creating your quiz
+        </p>
+      </div>
     </div>
   );
 }
