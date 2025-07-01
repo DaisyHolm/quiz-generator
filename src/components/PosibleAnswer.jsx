@@ -1,3 +1,19 @@
-export default function PosibleAnswer({ children }) {
-  return <button className="btn">{children}</button>;
+import { useState } from "react";
+import "./PosibleAnswer.css";
+
+export default function PosibleAnswer({
+  children,
+  onClick,
+  className,
+  disabled,
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`btn ${className}`}
+    >
+      {children}
+    </button>
+  );
 }

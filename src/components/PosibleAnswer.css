@@ -1,0 +1,16 @@
+.correct-answer {
+  background: rgb(91, 166, 91);
+  box-shadow: rgb(35, 88, 35) 0px 1px 2px 0px;
+}
+.correct-answer:hover {
+  background: rgb(91, 166, 91) !important;
+}
+
+.incorrect-answer {
+  background: rgb(250, 129, 129);
+  box-shadow: rgb(183, 58, 58) 0px 1px 2px 0px;
+}
+
+.incorrect-answer:hover {
+  background: rgb(250, 129, 129) !important;
+}
