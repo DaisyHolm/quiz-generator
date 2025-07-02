@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import RandomQuiz from "./components/RandomQuiz.jsx";
 import CreateQuiz from "./components/CreateQuiz/CreateQuiz.jsx";
+import { MyQuizzesContextProvider } from "./Store/my-quizzes-context.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
@@ -11,7 +12,11 @@ const router = createBrowserRouter([
   // {path: '/my-quizes', element: <MyQuizes />},
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <MyQuizzesContextProvider>
+      <RouterProvider router={router} />;
+    </MyQuizzesContextProvider>
+  );
 }
 
 export default App;
