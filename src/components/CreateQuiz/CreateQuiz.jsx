@@ -1,21 +1,21 @@
 import Button from "../Button/Button.jsx";
 import "./CreateQuiz.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import CreateQuestion from "../CreateQuestion/CreateQuestion.jsx";
 import { MyQuizzesContext } from "../../Store/my-quizzes-context.jsx";
 import { useContext } from "react";
 
 export default function CreateQuiz() {
-  const { createQuiz, newQuizAdded } = useContext(MyQuizzesContext);
+  const { createQuiz, isCreatingQuestion } = useContext(MyQuizzesContext);
+
   const titleRef = useRef();
   const descriptionRef = useRef();
-  console.log("newQuizAdded", newQuizAdded);
   return (
     <>
-      {newQuizAdded ? (
+      {isCreatingQuestion ? (
         <CreateQuestion />
       ) : (
-        <div className="create-question-container">
+        <div className="create-quiz-container">
           <h2>Let's Create A Fun New Quiz!</h2>
           <p>
             Add a title and a small description that match your theme to get
@@ -33,7 +33,7 @@ export default function CreateQuiz() {
             ref={descriptionRef}
             placeholder="Description"
           ></textarea>
-          <div className="create-question-cta">
+          <div className="create-quiz-cta">
             <Button
               onClick={() =>
                 createQuiz(titleRef.current.value, descriptionRef.current.value)
