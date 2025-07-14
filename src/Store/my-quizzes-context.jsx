@@ -1,35 +1,47 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const MyQuizzesContext = createContext({
   quizzesList: {},
   quizzes: () => {},
-  getQuiz: () => {},
   createQuiz: () => {},
   addQuestion: () => {},
   isCreatingQuestion: false,
   endQuestions: () => {},
+  saveChangesTitleAndDescription: () => {},
+  updateAndSave: () => {},
+  deleteQuiz: () => {},
 });
 
 export function MyQuizzesContextProvider({ children }) {
-  const [myQuizzes, setMyQuizzes] = useState({});
+  const [myQuizzes, setMyQuizzes] = useState(() => {
+    const storedQuizzes = localStorage.getItem("myStoredQuizzes");
+    if (!storedQuizzes) return {};
+
+    const parsed = JSON.parse(storedQuizzes);
+    // If parsed is null, fallback to {}
+    return parsed === null ? {} : parsed;
+  });
   const [addedQuestions, setAddedQuestions] = useState([]);
   const [currentQuizId, setCurrentQuizId] = useState("");
   const [isCreatingQuestion, setIsCreatingQuestion] = useState(false);
+  console.log(myQuizzes, "myQUIZZES");
 
   const ctxValue = {
     quizzesList: myQuizzes,
-    getQuiz: handleGetQuiz,
     createQuiz: handleCreateQuiz,
     addQuestion: handleAddQuestion,
     isCreatingQuestion: isCreatingQuestion,
     endQuestions: () => {
       setIsCreatingQuestion(false);
     },
+    saveChangesTitleAndDescription: handleSaveChangesTitleAndDescription,
+    updateAndSaveQuestion: handleUpdateAndSaveQuestion,
+    deleteQuiz: handleDeteteQuiz,
   };
 
-  function handleGetQuiz() {
-    console.log("hi");
-  }
+  useEffect(() => {
+    localStorage.setItem("myStoredQuizzes", JSON.stringify(myQuizzes));
+  }, [myQuizzes]);
 
   function handleCreateQuiz(title, description) {
     const id = crypto.randomUUID();
@@ -76,7 +88,42 @@ export function MyQuizzesContextProvider({ children }) {
       return updatedQuestions;
     });
   }
+  function handleSaveChangesTitleAndDescription(id, title, description) {
+    setMyQuizzes((prev) => {
+      const changedQuiz = {
+        ...prev[id],
+        title: title,
+        description: description,
+      };
 
+      return {
+        ...prev,
+        [id]: changedQuiz,
+      };
+    });
+  }
+  function handleUpdateAndSaveQuestion(quizId, updatedQuestion, questionIndex) {
+    setMyQuizzes((prev) => {
+      const currentQuiz = prev[quizId];
+      const updatedQuestions = [...currentQuiz.questions];
+      updatedQuestions[questionIndex] = updatedQuestion;
+
+      const updatedQuiz = {
+        ...currentQuiz,
+        questions: updatedQuestions,
+      };
+      return {
+        ...prev,
+        [quizId]: updatedQuiz,
+      };
+    });
+  }
+  function handleDeteteQuiz(id) {
+    setMyQuizzes((previous) => {
+      const { [id]: _, ...updated } = previous;
+      return updated;
+    });
+  }
   return (
     <MyQuizzesContext.Provider value={ctxValue}>
       {children}

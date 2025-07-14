@@ -28,7 +28,7 @@ export default function RandomQuiz(handleAnswer) {
 
   useEffect(() => {
     if (collectedResults.length > 0) {
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         if (currentQuestion < 9) {
           setCurrentQuestion(currentQuestion + 1);
         }
@@ -38,7 +38,7 @@ export default function RandomQuiz(handleAnswer) {
       }, 2000);
     }
   }, [collectedResults]);
-  console.log(isOpen, "open");
+
   return (
     <>
       {randomQuiz.length === 0 ? null : (

@@ -5,6 +5,11 @@ import "./MyStoredQuizzes.css";
 
 export default function MyStoredQuizzes() {
   const { quizzesList } = useContext(MyQuizzesContext);
+
+  if (!quizzesList || Object.keys(quizzesList).length === 0) {
+    return <p>No quizzes Found</p>;
+  }
+
   return (
     <>
       <div className="my-quizzes-container">
@@ -15,6 +20,7 @@ export default function MyStoredQuizzes() {
           </div>
           <div className="quiz-list">
             {Object.entries(quizzesList).map(([id, value]) => {
+              console.log(value, "What's the value?");
               return (
                 <div className="quiz-list-item" key={id}>
                   <div className="quiz-title">
@@ -24,10 +30,18 @@ export default function MyStoredQuizzes() {
                     <p>{value.description}</p>
                   </div>
                   <div className="quiz-btns">
-                    <Button className="btn-small">Play</Button>
-                    <Button className="btn-small" path={"/edit-quiz"}>
+                    <Button
+                      className="btn-small"
+                      path={`/edit-quiz/${id}`}
+                      quiz={value}
+                    >
                       Edit
                     </Button>
+                    {value.questions.length === 0 ? null : (
+                      <Button className="btn-small" path={`/play/${id}`}>
+                        Play
+                      </Button>
+                    )}
                   </div>
                 </div>
               );

@@ -24,7 +24,6 @@ export default function CreateQuestion() {
   }
   function handleSetOption(index, value) {
     setQuestionAndAnswer((prev) => {
-      console.log("prev", prev);
       const updatedOptions = [...prev.options];
       updatedOptions[index] = value;
       return { ...prev, options: updatedOptions };
@@ -50,6 +49,7 @@ export default function CreateQuestion() {
       question: question,
       options: options,
       correct_answer: options[correctAnswerIndex],
+      correctAnswerIndex: correctAnswerIndex,
     });
     setQuestionAndAnswer({
       question: "",
@@ -58,7 +58,7 @@ export default function CreateQuestion() {
     });
   }
   function handleRedirectToMyQuizzes() {
-    navigate("/my-stored-quizzes");
+    navigate("/my-quizzes");
     setTimeout(() => {
       endQuestions();
     }, 0);
@@ -84,6 +84,7 @@ export default function CreateQuestion() {
       question: question,
       options: options,
       correct_answer: options[correctAnswerIndex],
+      correctAnswerIndex: correctAnswerIndex,
     });
 
     handleRedirectToMyQuizzes();
@@ -127,8 +128,4 @@ export default function CreateQuestion() {
       </div>
     </>
   );
-}
-
-{
-  /* OLD CODE */
 }

@@ -2,7 +2,7 @@ import PosibleAnswer from "../PosibleAnswer/PosibleAnswer.jsx";
 import "./Question.css";
 import { useState, useEffect } from "react";
 
-export default function Question({ question, onAnswered }) {
+export default function Question({ question, onAnswered, index }) {
   const [answered, setAnswered] = useState(false);
   const [chosenAnswer, setChosenAnswer] = useState("");
   function handleAnswer(option) {
@@ -38,7 +38,7 @@ export default function Question({ question, onAnswered }) {
   }, [question]);
   return (
     <div className="question-container">
-      <h2>{question.index + 1 + "." + " " + question.question}</h2>
+      <h2>{index + 1 + "." + " " + question.question}</h2>
       <div className="answers-container">
         <PosibleAnswer
           onClick={() => handleAnswer(question.options[0])}

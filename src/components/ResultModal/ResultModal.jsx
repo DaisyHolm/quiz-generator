@@ -9,32 +9,34 @@ export default function ResultModal({ results }) {
   const [message, setMessage] = useState("");
   const [score, setScore] = useState("");
 
+  const numberOfQuestions = results.length;
   const correctAmountOfAnswers = results.filter((result) => result === true);
   const result = correctAmountOfAnswers.length;
+  const percentageCorrect = (result / numberOfQuestions) * 100;
 
   useEffect(() => {
     // Show modal based on score
-    if (result === 10) {
+    if (percentageCorrect === 100) {
       setTitleMessage("WOW Congratulations!");
       setMessage("You completely smashed this quiz!");
-      setScore("10/10");
+      setScore(`${result}/${numberOfQuestions}`);
       setIsOpen(true);
-    } else if (result >= 7) {
+    } else if (percentageCorrect >= 60) {
       setTitleMessage("Good Job!");
       setMessage("You did pretty good!");
-      setScore(`${result}/10`);
+      setScore(`${result}/${numberOfQuestions}`);
       setIsOpen(true);
-    } else if (result > 3) {
+    } else if (percentageCorrect >= 20) {
       setTitleMessage("Um...");
       setMessage("Did you even try?");
-      setScore(`${result}/10`);
+      setScore(`${result}/${numberOfQuestions}`);
     } else {
       setTitleMessage("Awkward...");
       setMessage("Maybe you should get out more?");
-      setScore(`${result}/10`);
+      setScore(`${result}/${numberOfQuestions}`);
     }
-  }, [result]);
-
+  }, []);
+  console.log(percentageCorrect);
   useEffect(() => {
     if (isOpen) {
       confetti({
