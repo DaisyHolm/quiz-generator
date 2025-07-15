@@ -1,9 +1,12 @@
+import "./EditQuestion.css";
+
 import { useContext, useState } from "react";
 import Button from "../Button/Button.jsx";
 import { MyQuizzesContext } from "../../Store/my-quizzes-context.jsx";
 
 export default function EditQuestion({ question, index, id, setIsEditing }) {
-  const { updateAndSaveQuestion } = useContext(MyQuizzesContext);
+  const { updateAndSaveQuestion, deleteQuestion } =
+    useContext(MyQuizzesContext);
   const [questionAndAnswers, setQuestionAndAnswers] = useState({
     question: question.question,
     options: question.options,
@@ -31,7 +34,10 @@ export default function EditQuestion({ question, index, id, setIsEditing }) {
     updateAndSaveQuestion(id, questionAndAnswers, index);
     setIsEditing(false);
   }
-
+  function handleDeleteQuestion() {
+    deleteQuestion(id, index);
+    setIsEditing(false);
+  }
   return (
     <>
       <div className="create-question-container">
@@ -59,8 +65,11 @@ export default function EditQuestion({ question, index, id, setIsEditing }) {
           ))}
         </div>
 
-        <div>
-          <Button onClick={() => finishEditing()}>Save</Button>
+        <div className="edit-question-buttons">
+          <Button onClick={finishEditing}>Save</Button>
+          <Button path={`/edit-quiz/${id}`} onClick={handleDeleteQuestion}>
+            Delete Question
+          </Button>
         </div>
       </div>
     </>

@@ -6,10 +6,17 @@ export const MyQuizzesContext = createContext({
   createQuiz: () => {},
   addQuestion: () => {},
   isCreatingQuestion: false,
+  setIsCreatingQuestion: () => {},
   endQuestions: () => {},
   saveChangesTitleAndDescription: () => {},
   updateAndSave: () => {},
   deleteQuiz: () => {},
+  preExistingQuiz: false,
+  addingQuestionToPreExistingQuiz: () => {},
+  currentQuizId: "",
+  addAdditionalQuestion: () => {},
+  createAdditionalQuestion: () => {},
+  deleteQuestion: () => {},
 });
 
 export function MyQuizzesContextProvider({ children }) {
@@ -24,19 +31,27 @@ export function MyQuizzesContextProvider({ children }) {
   const [addedQuestions, setAddedQuestions] = useState([]);
   const [currentQuizId, setCurrentQuizId] = useState("");
   const [isCreatingQuestion, setIsCreatingQuestion] = useState(false);
-  console.log(myQuizzes, "myQUIZZES");
+  const [addingQuestionToPreExistingQuiz, setAddingQuestionToPreExistingQuiz] =
+    useState(false);
 
   const ctxValue = {
     quizzesList: myQuizzes,
+    currentQuizId: currentQuizId,
     createQuiz: handleCreateQuiz,
     addQuestion: handleAddQuestion,
     isCreatingQuestion: isCreatingQuestion,
+    setIsCreatingQuestion,
     endQuestions: () => {
       setIsCreatingQuestion(false);
     },
     saveChangesTitleAndDescription: handleSaveChangesTitleAndDescription,
     updateAndSaveQuestion: handleUpdateAndSaveQuestion,
     deleteQuiz: handleDeteteQuiz,
+    preExistingQuiz: addingQuestionToPreExistingQuiz,
+    addingQuestionToPreExistingQuiz: setAddingQuestionToPreExistingQuiz,
+    addAdditionalQuestion: handleAddAdditionalQuestion,
+    createAdditionalQuestion: handleCreateAdditionalQuestion,
+    deleteQuestion: handleDeleteQuestion,
   };
 
   useEffect(() => {
@@ -62,16 +77,16 @@ export function MyQuizzesContextProvider({ children }) {
       };
       return updatedQuizzes;
     });
-
+    console.log("SET NEW QUIZ ID", id);
     setIsCreatingQuestion(true);
     setCurrentQuizId(id);
+    setAddedQuestions([]);
   }
 
   function handleAddQuestion(questionAndAnswers) {
     setAddedQuestions((prev) => {
       const updatedQuestions = [...prev, questionAndAnswers];
 
-      // updating quiz with new questions
       setMyQuizzes((prev) => {
         const currentQuiz = prev[currentQuizId];
         const updatedQuiz = {
@@ -84,7 +99,6 @@ export function MyQuizzesContextProvider({ children }) {
         return updatedMyQuizzes;
       });
 
-      // returning updates questions
       return updatedQuestions;
     });
   }
@@ -124,6 +138,50 @@ export function MyQuizzesContextProvider({ children }) {
       return updated;
     });
   }
+  function handleDeleteQuestion(id, indexToDelete) {
+    setMyQuizzes((prev) => {
+      const quiz = prev[id];
+
+      if (!quiz) {
+        return prev;
+      }
+      const updatedQuestions = quiz.questions.filter(
+        (question, index) => index !== indexToDelete
+      );
+      const updatedQuiz = {
+        ...quiz,
+        questions: updatedQuestions,
+      };
+      const updatedQuizzes = {
+        ...prev,
+        [id]: updatedQuiz,
+      };
+      return updatedQuizzes;
+    });
+  }
+  function handleCreateAdditionalQuestion(quizId) {
+    setAddingQuestionToPreExistingQuiz(true);
+    setCurrentQuizId(quizId);
+  }
+  function handleAddAdditionalQuestion(questionAndAnswers) {
+    console.log(questionAndAnswers, "QUESTIONANDANSWERS");
+
+    setMyQuizzes((prev) => {
+      const currentQuiz = prev[currentQuizId]; // Access the current quiz using currentQuizId
+      const updatedQuestions = [...currentQuiz.questions, questionAndAnswers]; // Append the new question
+
+      const updatedQuiz = {
+        ...currentQuiz,
+        questions: updatedQuestions, // Update the questions array
+      };
+
+      return {
+        ...prev,
+        [currentQuizId]: updatedQuiz, // Update the specific quiz in myQuizzes
+      };
+    });
+  }
+  console.log(myQuizzes, "FULL QUIZZES");
   return (
     <MyQuizzesContext.Provider value={ctxValue}>
       {children}

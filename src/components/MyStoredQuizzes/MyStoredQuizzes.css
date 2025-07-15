@@ -30,11 +30,7 @@
   width: 300px;
   color: inherit;
 }
-.btn-small {
-  min-width: 100px;
-  max-width: 100px;
-  padding: 0.5rem;
-}
+
 .quiz-btns {
   display: flex;
   gap: 0.5rem;

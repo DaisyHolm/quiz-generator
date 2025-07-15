@@ -3,7 +3,7 @@ import QUESTIONS from "../assets/general_knowledge_questions.json";
 import Question from "./Question/Question.jsx";
 import ResultModal from "./ResultModal/ResultModal.jsx";
 
-export default function RandomQuiz(handleAnswer) {
+export default function RandomQuiz() {
   const [randomQuiz, setRandomQuiz] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [collectedResults, setCollectedResults] = useState([]); //Array of booleans
@@ -45,6 +45,7 @@ export default function RandomQuiz(handleAnswer) {
         <Question
           onAnswered={questionAnswered}
           question={randomQuiz[currentQuestion]}
+          index={currentQuestion}
         />
       )}
       {isOpen && <ResultModal results={collectedResults} />}

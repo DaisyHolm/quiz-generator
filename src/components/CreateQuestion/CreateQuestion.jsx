@@ -6,7 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function CreateQuestion() {
   const navigate = useNavigate();
-  const { addQuestion, endQuestions } = useContext(MyQuizzesContext);
+  const {
+    addQuestion,
+    endQuestions,
+    preExistingQuiz,
+    addAdditionalQuestion,
+    isCreatingQuestion,
+    addingQuestionToPreExistingQuiz,
+    setIsCreatingQuestion,
+  } = useContext(MyQuizzesContext);
   const [questionAndAnswers, setQuestionAndAnswer] = useState({
     question: "",
     options: ["", "", "", ""],
@@ -44,19 +52,29 @@ export default function CreateQuestion() {
       alert("Please give four different posible answers before proceeding.");
       return;
     }
-
-    addQuestion({
-      question: question,
-      options: options,
-      correct_answer: options[correctAnswerIndex],
-      correctAnswerIndex: correctAnswerIndex,
-    });
+    if (isCreatingQuestion) {
+      addQuestion({
+        question: question,
+        options: options,
+        correct_answer: options[correctAnswerIndex],
+        correctAnswerIndex: correctAnswerIndex,
+      });
+    }
+    if (preExistingQuiz) {
+      addAdditionalQuestion({
+        question: question,
+        options: options,
+        correct_answer: options[correctAnswerIndex],
+        correctAnswerIndex: correctAnswerIndex,
+      });
+    }
     setQuestionAndAnswer({
       question: "",
       options: ["", "", "", ""],
       correctAnswerIndex: null,
     });
   }
+
   function handleRedirectToMyQuizzes() {
     navigate("/my-quizzes");
     setTimeout(() => {
@@ -80,12 +98,25 @@ export default function CreateQuestion() {
       alert("Please give four different posible answers before proceeding.");
       return;
     }
-    addQuestion({
-      question: question,
-      options: options,
-      correct_answer: options[correctAnswerIndex],
-      correctAnswerIndex: correctAnswerIndex,
-    });
+    if (isCreatingQuestion) {
+      addQuestion({
+        question: question,
+        options: options,
+        correct_answer: options[correctAnswerIndex],
+        correctAnswerIndex: correctAnswerIndex,
+      });
+      setIsCreatingQuestion(false);
+    }
+
+    if (preExistingQuiz) {
+      addAdditionalQuestion({
+        question: question,
+        options: options,
+        correct_answer: options[correctAnswerIndex],
+        correctAnswerIndex: correctAnswerIndex,
+      });
+      addingQuestionToPreExistingQuiz(false);
+    }
 
     handleRedirectToMyQuizzes();
   }

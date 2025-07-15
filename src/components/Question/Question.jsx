@@ -31,7 +31,6 @@ export default function Question({ question, onAnswered, index }) {
 
     return "";
   }
-
   useEffect(() => {
     setAnswered(false);
     setChosenAnswer("");

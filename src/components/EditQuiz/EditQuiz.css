@@ -1,0 +1,47 @@
+.edit-quiz-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 800px;
+  height: 100vh;
+  padding: 3rem;
+  margin: auto;
+}
+.edit-quiz-add-btn {
+  align-self: flex-end;
+}
+.edit-title-and-description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 70%;
+  input,
+  textarea {
+    padding: 0.5rem 1rem;
+  }
+  textarea {
+    min-height: 100px;
+    scrollbar-width: none;
+  }
+}
+.edit-questions {
+  width: 100%;
+}
+.edit-questions-list {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit-question-btns {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+.edit-quiz-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}

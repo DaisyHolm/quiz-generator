@@ -30,6 +30,17 @@ textarea {
   font-size: inherit;
   color: inherit;
   border-radius: 10px;
-  border: solid 1px;
+  border: solid 0.5px;
   border-color: var(--text-color);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--tertiary-color);
+}
+input[type="checkbox"]:checked {
+  accent-color: var(--secondary-color);
+}
+input[type="checkbox"]:hover {
+  accent-color: var(--tertiary-color);
 }

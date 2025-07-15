@@ -1,3 +1,5 @@
+import "./EditQuiz.css";
+
 import { useParams } from "react-router-dom";
 import { useContext, useState, useRef } from "react";
 import { MyQuizzesContext } from "../../Store/my-quizzes-context";
@@ -5,8 +7,13 @@ import Button from "../Button/Button";
 import EditQuestion from "../EditQuestion/EditQuestion.jsx";
 
 export default function EditQuiz() {
-  const { quizzesList, saveChangesTitleAndDescription, deleteQuiz } =
-    useContext(MyQuizzesContext);
+  const {
+    quizzesList,
+    saveChangesTitleAndDescription,
+    deleteQuiz,
+    createAdditionalQuestion,
+    deleteQuestion,
+  } = useContext(MyQuizzesContext);
   const [isEditing, setIsEditing] = useState(false);
   const [indexToEdit, setIndexToEdit] = useState();
   const titleRef = useRef();
@@ -23,11 +30,19 @@ export default function EditQuiz() {
   const { title, description, questions } = currentQuiz;
   const questionsList = questions.map((question, index) => {
     return (
-      <div key={index}>
-        <span>{question.question}</span>
-        <Button onClick={() => handleEdit(index)} className="small">
-          Edit
-        </Button>
+      <div className="edit-questions-list" key={index}>
+        <p>{question.question}</p>
+        <div className="edit-question-btns">
+          <Button className="btn-small" onClick={() => handleEdit(index)}>
+            Edit
+          </Button>
+          <Button
+            className="btn-small"
+            onClick={() => deleteQuestion(currentId, index)}
+          >
+            Delete
+          </Button>
+        </div>
       </div>
     );
   });
@@ -48,36 +63,40 @@ export default function EditQuiz() {
         />
       ) : (
         <>
+          <div className="edit-quiz-add-btn">
+            <Button
+              onClick={() => createAdditionalQuestion(currentId)}
+              path="/create-quiz"
+            >
+              Add Question +
+            </Button>
+          </div>
           <div className="edit-title-and-description">
-            <input
+            <input type="text" defaultValue={title} ref={titleRef} />
+            <textarea
               type="text"
-              className="edit-title"
-              defaultValue={title}
-              ref={titleRef}
-            />
-            <input
-              type="text"
-              className="edit-description"
               defaultValue={description}
               ref={descriptionRef}
             />
           </div>
           <div className="edit-questions">{questionsList}</div>
-          <Button
-            onClick={() =>
-              saveChangesTitleAndDescription(
-                currentId,
-                titleRef.current.value,
-                descriptionRef.current.value
-              )
-            }
-            path="/my-quizzes"
-          >
-            Save Changes
-          </Button>
-          <Button onClick={() => deleteQuiz(currentId)} path="/my-quizzes">
-            Delete quiz
-          </Button>
+          <div className="edit-quiz-buttons">
+            <Button
+              onClick={() =>
+                saveChangesTitleAndDescription(
+                  currentId,
+                  titleRef.current.value,
+                  descriptionRef.current.value
+                )
+              }
+              path="/my-quizzes"
+            >
+              Save Changes
+            </Button>
+            <Button onClick={() => deleteQuiz(currentId)} path="/my-quizzes">
+              Delete Quiz
+            </Button>
+          </div>
         </>
       )}
     </div>

@@ -6,13 +6,14 @@ import { MyQuizzesContext } from "../../Store/my-quizzes-context.jsx";
 import { useContext } from "react";
 
 export default function CreateQuiz() {
-  const { createQuiz, isCreatingQuestion } = useContext(MyQuizzesContext);
+  const { createQuiz, isCreatingQuestion, preExistingQuiz } =
+    useContext(MyQuizzesContext);
 
   const titleRef = useRef();
   const descriptionRef = useRef();
   return (
     <>
-      {isCreatingQuestion ? (
+      {isCreatingQuestion || preExistingQuiz ? (
         <CreateQuestion />
       ) : (
         <div className="create-quiz-container">
