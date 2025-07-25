@@ -3,3 +3,8 @@
   gap: 1rem;
   margin-top: 0.5rem;
 }
+@media (max-width: 500px) {
+  .edit-question-buttons {
+    flex-direction: column;
+  }
+}
