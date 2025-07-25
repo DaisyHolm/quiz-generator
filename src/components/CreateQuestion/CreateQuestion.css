@@ -70,8 +70,3 @@
     width: 300px;
   }
 }
-@media (max-width: 500px) {
-  .create-question-btns {
-    flex-direction: column;
-  }
-}
