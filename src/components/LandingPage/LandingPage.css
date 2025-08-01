@@ -22,6 +22,10 @@
   }
   .headline {
     font-size: 4rem;
+    padding: 0 1.5rem;
+  }
+  .flex-container {
+    overflow: hidden;
   }
 }
 

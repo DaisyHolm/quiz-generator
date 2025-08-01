@@ -15,6 +15,7 @@
 body {
   background: var(--primary-color);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 .flex-container {
   display: flex;

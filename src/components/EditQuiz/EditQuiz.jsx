@@ -24,7 +24,11 @@ export default function EditQuiz() {
   const currentQuiz = quizzesList[currentId];
 
   if (!currentQuiz) {
-    return <p>Quiz couldnt be found</p>;
+    return (
+      <div className="quiz-error">
+        <p>Quiz couldn't be found!</p>
+      </div>
+    );
   }
 
   const { title, description, questions } = currentQuiz;

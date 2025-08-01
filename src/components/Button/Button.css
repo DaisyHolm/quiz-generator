@@ -21,7 +21,13 @@
   font-size: 16px;
 }
 
-.btn:hover {
-  transform: scale(1.1);
-  background: var(--tertiary-color);
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: scale(1.1);
+    background: var(--tertiary-color);
+  }
+  .btn:active {
+    transform: scale(1.1);
+    background: var(--tertiary-color);
+  }
 }
