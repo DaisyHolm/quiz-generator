@@ -45,4 +45,10 @@
   .modal-container {
     width: 90%;
   }
+  .message-container h2 {
+    font-size: 2rem;
+  }
+  .modal-container .result-score {
+    font-size: 2.5rem;
+  }
 }
